@@ -2,7 +2,7 @@
 
 Full-stack software engineer portfolio built with React, TypeScript, Vite, and Tailwind CSS.
 
-🌐 **Live**: [https://ihaiderr.github.io/](https://ihaiderr.github.io/)
+🌐 **Live**: [https://haider-bitcoding.github.io/haider-portfolio/](https://haider-bitcoding.github.io/haider-portfolio/)
 
 ---
 
@@ -37,6 +37,7 @@ npm run preview
 ## ✨ Features
 
 ### 🎨 Design & UX
+
 - **Dark/Light Theme Toggle** — Persisted to localStorage, respects system preference
 - **Animated Gradient Background** — Interactive parallax effect following mouse movement
 - **Scroll Progress Indicator** — Visual feedback showing page scroll position
@@ -47,12 +48,14 @@ npm run preview
 - **Terminal Animation** — Typing effect in hero section
 
 ### 📱 Responsive Design
+
 - Mobile-first approach
 - Responsive grid layouts
 - Mobile navigation with hamburger menu
 - Touch-friendly interactions
 
 ### ♿ Accessibility (WCAG 2.1 AA)
+
 - Semantic HTML5 (`<nav>`, `<main>`, `<section>`, `<article>`, `<header>`, `<footer>`)
 - Skip-to-content link for keyboard users
 - ARIA labels and roles throughout
@@ -63,6 +66,7 @@ npm run preview
 - Scroll progress bar with ARIA attributes
 
 ### 🔍 SEO
+
 - Meta tags (title, description, canonical)
 - Open Graph (Facebook, LinkedIn)
 - Twitter Card
@@ -71,6 +75,7 @@ npm run preview
 - Proper heading hierarchy (h1 → h2 → h3)
 
 ### ⚡ Performance
+
 - ~57KB JavaScript (gzipped)
 - Inline critical CSS (no FOUC)
 - SVG favicon (zero network requests)
@@ -80,6 +85,7 @@ npm run preview
 - RequestAnimationFrame for smooth counters
 
 ### 🛡 Production Hardening
+
 - Error boundary with graceful fallback
 - 404 page for GitHub Pages
 - Print stylesheet
@@ -104,6 +110,7 @@ This portfolio is configured for automatic deployment to GitHub Pages via GitHub
 4. Push to `main` — the workflow deploys automatically
 
 The workflow:
+
 - Builds the project with Vite
 - Uploads the `dist/` folder as a Pages artifact
 - Deploys to `https://<username>.github.io/<repo>/`
@@ -168,9 +175,9 @@ Edit `src/index.css` → `@theme` block:
 
 ```css
 @theme {
-  --color-primary: #6366f1;      /* Indigo */
+  --color-primary: #6366f1; /* Indigo */
   --color-primary-light: #818cf8;
-  --color-accent: #22d3ee;       /* Cyan */
+  --color-accent: #22d3ee; /* Cyan */
 }
 ```
 
