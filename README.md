@@ -31,7 +31,62 @@ npm run preview
 - **Vite** — Build tool & dev server
 - **Tailwind CSS 4** — Utility-first styling
 - **Lucide React** — Icon library
-- **GitHub Actions** — CI/CD deployment
+
+---
+
+## ✨ Features
+
+### 🎨 Design & UX
+- **Dark/Light Theme Toggle** — Persisted to localStorage, respects system preference
+- **Animated Gradient Background** — Interactive parallax effect following mouse movement
+- **Scroll Progress Indicator** — Visual feedback showing page scroll position
+- **Animated Skill Progress Bars** — Skills animate in when scrolled into view
+- **Animated Stats Counters** — Numbers count up with easing when visible
+- **Profile Image with Fallback** — Shows initials if image fails to load
+- **Smooth Micro-interactions** — Hover effects, scale transforms, and transitions
+- **Terminal Animation** — Typing effect in hero section
+
+### 📱 Responsive Design
+- Mobile-first approach
+- Responsive grid layouts
+- Mobile navigation with hamburger menu
+- Touch-friendly interactions
+
+### ♿ Accessibility (WCAG 2.1 AA)
+- Semantic HTML5 (`<nav>`, `<main>`, `<section>`, `<article>`, `<header>`, `<footer>`)
+- Skip-to-content link for keyboard users
+- ARIA labels and roles throughout
+- Focus-visible indicators
+- Reduced motion support (`prefers-reduced-motion`)
+- Keyboard navigation (Escape closes mobile menu)
+- Screen reader friendly (proper heading hierarchy, `aria-current`, `aria-hidden`)
+- Scroll progress bar with ARIA attributes
+
+### 🔍 SEO
+- Meta tags (title, description, canonical)
+- Open Graph (Facebook, LinkedIn)
+- Twitter Card
+- JSON-LD structured data (Person schema)
+- `robots.txt` and `sitemap.xml`
+- Proper heading hierarchy (h1 → h2 → h3)
+
+### ⚡ Performance
+- ~57KB JavaScript (gzipped)
+- Inline critical CSS (no FOUC)
+- SVG favicon (zero network requests)
+- Preconnected fonts
+- Lazy-loaded animations with Intersection Observer
+- Passive scroll listeners
+- RequestAnimationFrame for smooth counters
+
+### 🛡 Production Hardening
+- Error boundary with graceful fallback
+- 404 page for GitHub Pages
+- Print stylesheet
+- Custom scrollbar styling
+- Selection color theming
+- Theme persistence in localStorage
+- System preference detection
 
 ---
 
@@ -57,49 +112,6 @@ The workflow:
 
 ---
 
-## 🎨 Features
-
-### Design
-- Dark theme with indigo/cyan gradient accents
-- Glassmorphism navigation bar
-- Animated terminal in hero section
-- Responsive design (mobile → 4K)
-- Smooth scroll animations with intersection observer
-
-### Performance
-- ~55KB JavaScript (gzipped)
-- Inline critical CSS (no FOUC)
-- SVG favicon (zero network requests)
-- Preconnected fonts
-- Lazy-loaded animations
-
-### Accessibility (WCAG 2.1 AA)
-- Semantic HTML5 (`<nav>`, `<main>`, `<section>`, `<article>`, `<header>`, `<footer>`)
-- Skip-to-content link for keyboard users
-- ARIA labels and roles throughout
-- Focus-visible indicators
-- Reduced motion support (`prefers-reduced-motion`)
-- Keyboard navigation (Escape closes mobile menu)
-- Screen reader friendly (proper heading hierarchy, `aria-current`, `aria-hidden`)
-
-### SEO
-- Meta tags (title, description, canonical)
-- Open Graph (Facebook, LinkedIn)
-- Twitter Card
-- JSON-LD structured data (Person schema)
-- `robots.txt` and `sitemap.xml`
-- Proper heading hierarchy (h1 → h2 → h3)
-
-### Production Hardening
-- Error boundary with graceful fallback
-- 404 page for GitHub Pages
-- Print stylesheet
-- Custom scrollbar styling
-- Selection color theming
-- No external dependencies beyond fonts/icons
-
----
-
 ## 📁 Project Structure
 
 ```
@@ -118,9 +130,15 @@ The workflow:
 │   │   ├── Education.tsx       # Timeline of education
 │   │   ├── ErrorBoundary.tsx   # Production error handling
 │   │   ├── Hero.tsx            # Hero with terminal animation
-│   │   ├── Navbar.tsx          # Sticky nav with mobile menu
-│   │   ├── Skills.tsx          # Tech stack grid
+│   │   ├── Navbar.tsx          # Sticky nav with theme toggle
+│   │   ├── ScrollProgress.tsx  # Scroll progress indicator
+│   │   ├── Skills.tsx          # Animated skill progress bars
+│   │   ├── Stats.tsx           # Animated counters
 │   │   └── Work.tsx            # Project showcase
+│   ├── context/
+│   │   └── ThemeContext.tsx    # Dark/light theme management
+│   ├── hooks/
+│   │   └── useCounter.ts     # Animated counter hook
 │   ├── App.tsx                 # Root component
 │   ├── index.css               # Global styles & Tailwind
 │   └── main.tsx                # Entry point
@@ -131,17 +149,11 @@ The workflow:
 
 ---
 
-## 🔄 Next.js Migration
-
-Want to convert this to Next.js for static export? See [`GITHUB_PAGES.md`](./GITHUB_PAGES.md) for a complete step-by-step runbook.
-
----
-
-## 📝 Customization
+## 🎨 Customization
 
 ### Update personal info
 
-Edit the data directly in each component file, or extract to a `data/` directory:
+Edit the data directly in each component file:
 
 - **Hero**: `src/components/Hero.tsx`
 - **About**: `src/components/About.tsx`
@@ -166,17 +178,21 @@ Edit `src/index.css` → `@theme` block:
 
 Edit `index.html` Google Fonts link and `src/index.css` `font-family`.
 
+### Update profile image
+
+Replace `/public/images/pp.jpg` with your own photo. The component has a fallback that shows initials if the image fails to load.
+
+---
+
+## 🔄 Next.js Migration
+
+Want to convert this to Next.js for static export? See [`GITHUB_PAGES.md`](./GITHUB_PAGES.md) for a complete step-by-step runbook.
+
 ---
 
 ## 📄 License
 
 MIT — use freely for your own portfolio.
-
----
-
-## 🤝 Contributing
-
-This is a personal portfolio, but feel free to fork and adapt!
 
 ---
 

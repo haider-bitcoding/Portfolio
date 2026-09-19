@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Moon, Sun } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 const navLinks = [
   { id: 'hero', label: 'Home' },
@@ -16,6 +17,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const navRef = useRef<HTMLElement>(null);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,7 +36,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on Escape
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && mobileOpen) {
@@ -45,7 +46,6 @@ export default function Navbar() {
     return () => document.removeEventListener('keydown', handleKey);
   }, [mobileOpen]);
 
-  // Trap focus in mobile menu when open
   useEffect(() => {
     if (mobileOpen) {
       document.body.style.overflow = 'hidden';
@@ -92,18 +92,36 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
+
+            {/* Theme toggle in nav */}
+            <button
+              onClick={toggleTheme}
+              className="ml-2 p-2 rounded-lg text-text-muted hover:text-text hover:bg-surface-light transition-all duration-200"
+              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            >
+              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
           </div>
 
           {/* Mobile toggle */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 text-text-muted hover:text-text rounded-lg focus-visible:outline-primary-light"
-            aria-expanded={mobileOpen}
-            aria-controls="mobile-menu"
-            aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
-          >
-            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          <div className="flex md:hidden items-center gap-1">
+            <button
+              onClick={toggleTheme}
+              className="p-2 text-text-muted hover:text-text rounded-lg"
+              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            >
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="p-2 text-text-muted hover:text-text rounded-lg focus-visible:outline-primary-light"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-menu"
+              aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            >
+              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
       </div>
 

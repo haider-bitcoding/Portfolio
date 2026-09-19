@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import { ArrowDown, MapPin } from 'lucide-react';
+import { ArrowDown, MapPin, Github, Linkedin } from 'lucide-react';
 
 export default function Hero() {
   const [terminalLines, setTerminalLines] = useState<number>(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    // Respect reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
       setTerminalLines(3);
@@ -20,21 +20,68 @@ export default function Hero() {
     return () => timers.forEach(clearTimeout);
   }, []);
 
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: (e.clientX / window.innerWidth - 0.5) * 20,
+        y: (e.clientY / window.innerHeight - 0.5) * 20,
+      });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center relative overflow-hidden grid-bg"
+      className="min-h-screen flex items-center relative overflow-hidden"
       aria-label="Introduction"
     >
-      {/* Gradient orbs — decorative */}
-      <div className="absolute top-1/4 -left-32 w-64 h-64 bg-primary/20 rounded-full blur-[100px] aria-hidden" aria-hidden="true" />
-      <div className="absolute bottom-1/4 -right-32 w-64 h-64 bg-accent/10 rounded-full blur-[100px] aria-hidden" aria-hidden="true" />
+      {/* Animated gradient background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div
+          className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/30 rounded-full blur-[120px] animate-pulse"
+          style={{
+            transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
+            transition: 'transform 0.3s ease-out',
+          }}
+          aria-hidden="true"
+        />
+        <div
+          className="absolute bottom-1/4 -right-32 w-96 h-96 bg-accent/20 rounded-full blur-[120px] animate-pulse"
+          style={{
+            transform: `translate(${-mousePosition.x}px, ${-mousePosition.y}px)`,
+            transition: 'transform 0.3s ease-out',
+            animationDelay: '1s',
+          }}
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 grid-bg opacity-30" aria-hidden="true" />
+      </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-24 w-full">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-24 w-full relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left content */}
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-surface-light/50 text-sm text-text-muted">
+            {/* Profile image - mobile */}
+            <div className="lg:hidden flex justify-center mb-6">
+              <div className="relative">
+                <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-primary/30 glow">
+                  <img
+                    src="/images/pp.jpg"
+                    alt="Haider Ali"
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                      e.currentTarget.parentElement!.innerHTML = '<div class="w-full h-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-4xl font-bold text-white">HA</div>';
+                    }}
+                  />
+                </div>
+                <div className="absolute -bottom-1 -right-1 w-8 h-8 bg-green-500 rounded-full border-4 border-surface animate-pulse" />
+              </div>
+            </div>
+
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-surface-light/50 text-sm text-text-muted backdrop-blur-sm">
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" aria-hidden="true" />
               Full-stack Developer
             </div>
@@ -79,30 +126,69 @@ export default function Hero() {
             <div className="flex flex-wrap gap-3 pt-4">
               <a
                 href="#work"
-                className="px-6 py-3 bg-primary hover:bg-primary-dark text-white rounded-lg font-medium transition-all duration-200 hover:shadow-lg hover:shadow-primary/25 focus-visible:outline-primary-light"
+                className="px-6 py-3 bg-primary hover:bg-primary-dark text-white rounded-lg font-medium transition-all duration-200 hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5 focus-visible:outline-primary-light"
               >
                 See my work
               </a>
               <a
                 href="mailto:haiderali.dev.se@gmail.com"
-                className="px-6 py-3 border border-border hover:border-primary/50 text-text rounded-lg font-medium transition-all duration-200 hover:bg-surface-light focus-visible:outline-primary-light"
+                className="px-6 py-3 border border-border hover:border-primary/50 text-text rounded-lg font-medium transition-all duration-200 hover:bg-surface-light hover:-translate-y-0.5 focus-visible:outline-primary-light"
               >
                 Email me
               </a>
             </div>
+
+            {/* Social links */}
+            <div className="flex gap-4 pt-2">
+              <a
+                href="https://www.linkedin.com/in/ihaiderr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg border border-border hover:border-primary/50 text-text-muted hover:text-primary-light transition-all duration-200 hover:-translate-y-0.5"
+                aria-label="LinkedIn (opens in new tab)"
+              >
+                <Linkedin size={20} />
+              </a>
+              <a
+                href="https://github.com/ihaiderr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg border border-border hover:border-primary/50 text-text-muted hover:text-primary-light transition-all duration-200 hover:-translate-y-0.5"
+                aria-label="GitHub (opens in new tab)"
+              >
+                <Github size={20} />
+              </a>
+            </div>
           </div>
 
-          {/* Right - Terminal */}
-          <div className="hidden lg:block" aria-hidden="true">
-            <div className="glass rounded-xl overflow-hidden glow">
-              {/* Terminal header */}
+          {/* Right - Terminal + Profile */}
+          <div className="hidden lg:block space-y-6">
+            {/* Profile image */}
+            <div className="flex justify-center">
+              <div className="relative">
+                <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-primary/30 glow">
+                  <img
+                    src="/images/pp.jpg"
+                    alt="Haider Ali"
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                      e.currentTarget.parentElement!.innerHTML = '<div class="w-full h-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-6xl font-bold text-white">HA</div>';
+                    }}
+                  />
+                </div>
+                <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-green-500 rounded-full border-4 border-surface animate-pulse" />
+              </div>
+            </div>
+
+            {/* Terminal */}
+            <div className="glass rounded-xl overflow-hidden glow" aria-hidden="true">
               <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-surface-light/50">
                 <div className="w-3 h-3 rounded-full bg-red-500/80" />
                 <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                 <div className="w-3 h-3 rounded-full bg-green-500/80" />
                 <span className="ml-2 text-xs text-text-muted font-mono">haider@dev: ~</span>
               </div>
-              {/* Terminal body */}
               <div className="p-5 font-mono text-sm space-y-3 min-h-[200px]">
                 <div className="flex items-center gap-2">
                   <span className="text-accent">$</span>

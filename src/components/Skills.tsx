@@ -5,59 +5,94 @@ const skillGroups = [
     key: 'languages',
     title: 'Languages',
     items: [
-      { name: 'Java', primary: true, level: 'Expert', years: 4 },
-      { name: 'JavaScript', primary: true, level: 'Advanced', years: 3 },
-      { name: 'SQL', primary: true, level: 'Expert', years: 4 },
-      { name: 'Python (basic)' },
+      { name: 'Java', primary: true, level: 'Expert', years: 4, percentage: 95 },
+      { name: 'JavaScript', primary: true, level: 'Advanced', years: 3, percentage: 85 },
+      { name: 'SQL', primary: true, level: 'Expert', years: 4, percentage: 90 },
+      { name: 'Python', percentage: 60 },
     ],
   },
   {
     key: 'backend',
     title: 'Backend',
     items: [
-      { name: 'Spring Boot', primary: true, level: 'Expert', years: 4 },
-      { name: 'REST APIs', primary: true, level: 'Expert', years: 4 },
-      { name: 'JWT' },
-      { name: 'OAuth2' },
-      { name: 'Hibernate/JPA' },
-      { name: 'Node.js' },
-      { name: 'Express' },
+      { name: 'Spring Boot', primary: true, level: 'Expert', years: 4, percentage: 95 },
+      { name: 'REST APIs', primary: true, level: 'Expert', years: 4, percentage: 95 },
+      { name: 'JWT / OAuth2', percentage: 85 },
+      { name: 'Hibernate/JPA', percentage: 80 },
+      { name: 'Node.js / Express', percentage: 75 },
     ],
   },
   {
     key: 'frontend',
     title: 'Frontend',
     items: [
-      { name: 'React', primary: true, level: 'Advanced', years: 3 },
-      { name: 'Next.js', primary: true, level: 'Advanced', years: 3 },
-      { name: 'Vue.js' },
-      { name: 'HTML5' },
-      { name: 'CSS3' },
+      { name: 'React', primary: true, level: 'Advanced', years: 3, percentage: 85 },
+      { name: 'Next.js', primary: true, level: 'Advanced', years: 3, percentage: 85 },
+      { name: 'Vue.js', percentage: 70 },
+      { name: 'HTML5 / CSS3', percentage: 90 },
     ],
   },
   {
     key: 'data',
     title: 'Data',
     items: [
-      { name: 'PostgreSQL', primary: true, level: 'Expert', years: 4 },
-      { name: 'MySQL' },
-      { name: 'MongoDB' },
+      { name: 'PostgreSQL', primary: true, level: 'Expert', years: 4, percentage: 90 },
+      { name: 'MySQL', percentage: 80 },
+      { name: 'MongoDB', percentage: 75 },
     ],
   },
   {
     key: 'tooling',
     title: 'Tooling',
     items: [
-      { name: 'Git/GitHub', primary: true, level: 'Expert', years: 5 },
-      { name: 'Docker' },
-      { name: 'Vercel' },
-      { name: 'Render' },
-      { name: 'Swagger/OpenAPI' },
-      { name: 'Flyway' },
-      { name: 'LLM API Integration' },
+      { name: 'Git/GitHub', primary: true, level: 'Expert', years: 5, percentage: 95 },
+      { name: 'Docker', percentage: 75 },
+      { name: 'Vercel / Render', percentage: 80 },
+      { name: 'Swagger/OpenAPI', percentage: 85 },
+      { name: 'LLM API Integration', percentage: 70 },
     ],
   },
 ];
+
+function SkillBar({ name, percentage, level, delay }: { name: string; percentage: number; level?: string; delay: number }) {
+  const [width, setWidth] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => setWidth(percentage), delay);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [percentage, delay]);
+
+  return (
+    <div ref={ref} className="group">
+      <div className="flex justify-between items-center mb-2">
+        <span className="text-sm font-medium text-text group-hover:text-primary-light transition-colors">
+          {name}
+        </span>
+        {level && (
+          <span className="text-xs text-text-muted opacity-0 group-hover:opacity-100 transition-opacity">
+            {level}
+          </span>
+        )}
+      </div>
+      <div className="h-2 bg-surface-lighter/50 rounded-full overflow-hidden border border-border/30">
+        <div
+          className="h-full bg-gradient-to-r from-primary to-accent rounded-full transition-all duration-1000 ease-out"
+          style={{ width: `${width}%` }}
+        />
+      </div>
+    </div>
+  );
+}
 
 export default function Skills() {
   const [visible, setVisible] = useState(false);
@@ -91,38 +126,27 @@ export default function Skills() {
             </p>
           </header>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-6">
             {skillGroups.map((group, gi) => (
               <div
                 key={group.key}
-                className={`p-6 rounded-xl border border-border bg-surface-light/20 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}
+                className={`p-6 rounded-xl border border-border bg-surface-light/20 hover:border-primary/30 transition-all duration-300 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}
                 style={{ animationDelay: `${gi * 100}ms` }}
               >
-                <h3 className="text-sm uppercase tracking-wider text-text-muted font-medium mb-4">
+                <h3 className="text-sm uppercase tracking-wider text-text-muted font-medium mb-5">
                   {group.title}
                 </h3>
-                <ul className="flex flex-wrap gap-2" aria-label={`${group.title} skills`}>
-                  {group.items.map((item) => (
-                    <li key={item.name}>
-                      <span
-                        className={`inline-block px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-                          item.primary
-                            ? 'bg-primary/15 text-primary-light border border-primary/20 hover:bg-primary/25'
-                            : 'bg-surface-lighter/50 text-text-muted border border-border hover:text-text hover:border-text-muted'
-                        }`}
-                        title={item.level ? `${item.level} · ${item.years} years` : undefined}
-                        aria-label={item.level ? `${item.name}, ${item.level}, ${item.years} years` : item.name}
-                      >
-                        {item.name}
-                        {item.level && (
-                          <span className="ml-1 text-[10px] opacity-60">
-                            {item.level}
-                          </span>
-                        )}
-                      </span>
-                    </li>
+                <div className="space-y-4">
+                  {group.items.map((item, i) => (
+                    <SkillBar
+                      key={item.name}
+                      name={item.name}
+                      percentage={item.percentage}
+                      level={item.level}
+                      delay={i * 100 + gi * 50}
+                    />
                   ))}
-                </ul>
+                </div>
               </div>
             ))}
           </div>
