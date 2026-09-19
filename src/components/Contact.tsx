@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Mail, Phone, MapPin, Linkedin, Instagram, Send } from 'lucide-react';
+import MagneticButton from './MagneticButton';
 
 export default function Contact() {
   const [visible, setVisible] = useState(false);
@@ -26,8 +27,8 @@ export default function Contact() {
         <div className={`transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="relative p-8 sm:p-12 rounded-2xl border border-border bg-surface-light/20 overflow-hidden">
             {/* Background decoration — decorative only */}
-            <div className="absolute -top-20 -right-20 w-80 h-80 bg-primary/5 rounded-full blur-[100px]" aria-hidden="true" />
-            <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-accent/5 rounded-full blur-[80px]" aria-hidden="true" />
+            <div className="absolute -top-20 -right-20 w-80 h-80 bg-primary/5 rounded-full blur-[100px] animate-pulse" aria-hidden="true" />
+            <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-accent/5 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: '1s' }} aria-hidden="true" />
 
             <div className="relative z-10">
               <header className="mb-8">
@@ -35,17 +36,17 @@ export default function Contact() {
                   Get in <span className="gradient-text">touch</span>
                 </h2>
                 <p className="text-text-muted max-w-lg leading-relaxed">
-                  Open to junior/graduate software engineering roles and freelance backend or full-stack work. Reach out directly — I usually reply within a day.
+                  As an Associate Software Engineer, I'm open to junior/graduate roles and freelance backend or full-stack work. Reach out directly — I usually reply within a day.
                 </p>
               </header>
 
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                 <a
                   href="mailto:haiderali.dev.se@gmail.com"
-                  className="flex items-center gap-3 p-4 rounded-xl border border-border bg-surface-lighter/30 hover:bg-surface-lighter/60 hover:border-primary/30 transition-all duration-200 group focus-visible:outline-primary-light"
+                  className="flex items-center gap-3 p-4 rounded-xl border border-border bg-surface-lighter/30 hover:bg-surface-lighter/60 hover:border-primary/30 hover:scale-105 transition-all duration-200 group focus-visible:outline-primary-light"
                   aria-label="Send email to haiderali.dev.se@gmail.com"
                 >
-                  <div className="p-2 rounded-lg bg-primary/10 text-primary-light group-hover:bg-primary/20 transition-colors" aria-hidden="true">
+                  <div className="p-2 rounded-lg bg-primary/10 text-primary-light group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300" aria-hidden="true">
                     <Mail size={18} />
                   </div>
                   <div>
@@ -56,10 +57,10 @@ export default function Contact() {
 
                 <a
                   href="tel:+923044122641"
-                  className="flex items-center gap-3 p-4 rounded-xl border border-border bg-surface-lighter/30 hover:bg-surface-lighter/60 hover:border-primary/30 transition-all duration-200 group focus-visible:outline-primary-light"
+                  className="flex items-center gap-3 p-4 rounded-xl border border-border bg-surface-lighter/30 hover:bg-surface-lighter/60 hover:border-primary/30 hover:scale-105 transition-all duration-200 group focus-visible:outline-primary-light"
                   aria-label="Call +92-304-4122641"
                 >
-                  <div className="p-2 rounded-lg bg-primary/10 text-primary-light group-hover:bg-primary/20 transition-colors" aria-hidden="true">
+                  <div className="p-2 rounded-lg bg-primary/10 text-primary-light group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300" aria-hidden="true">
                     <Phone size={18} />
                   </div>
                   <div>
@@ -81,33 +82,27 @@ export default function Contact() {
 
               {/* Social links */}
               <nav aria-label="Social media links" className="flex flex-wrap items-center gap-4">
-                <a
+                <MagneticButton
                   href="https://www.linkedin.com/in/ihaiderr"
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-surface-lighter/30 hover:bg-primary/10 hover:border-primary/30 text-text-muted hover:text-primary-light transition-all duration-200 focus-visible:outline-primary-light"
-                  aria-label="Visit LinkedIn profile (opens in new tab)"
                 >
                   <Linkedin size={16} aria-hidden="true" />
                   <span className="text-sm font-medium">LinkedIn</span>
-                </a>
-                <a
+                </MagneticButton>
+                <MagneticButton
                   href="https://www.instagram.com/ihaiderr"
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-surface-lighter/30 hover:bg-primary/10 hover:border-primary/30 text-text-muted hover:text-primary-light transition-all duration-200 focus-visible:outline-primary-light"
-                  aria-label="Visit Instagram profile (opens in new tab)"
                 >
                   <Instagram size={16} aria-hidden="true" />
                   <span className="text-sm font-medium">Instagram</span>
-                </a>
-                <a
+                </MagneticButton>
+                <MagneticButton
                   href="mailto:haiderali.dev.se@gmail.com"
                   className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary hover:bg-primary-dark text-white font-medium transition-all duration-200 hover:shadow-lg hover:shadow-primary/25 focus-visible:outline-primary-light"
                 >
                   <Send size={16} aria-hidden="true" />
                   <span className="text-sm">Send a message</span>
-                </a>
+                </MagneticButton>
               </nav>
 
               {/* Status */}

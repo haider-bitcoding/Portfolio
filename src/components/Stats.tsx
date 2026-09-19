@@ -3,7 +3,7 @@ import { useCounter } from '../hooks/useCounter';
 import { Code2, Briefcase, Award, Globe } from 'lucide-react';
 
 const stats = [
-  { icon: Code2, label: 'Years Coding', value: 4, suffix: '+' },
+  { icon: Code2, label: 'Year of Experience', value: 1, suffix: '+' },
   { icon: Briefcase, label: 'Projects Shipped', value: 10, suffix: '+' },
   { icon: Award, label: 'Technologies', value: 25, suffix: '+' },
   { icon: Globe, label: 'Languages Spoken', value: 4, suffix: '' },
@@ -20,10 +20,10 @@ function StatCard({ icon: Icon, label, value, suffix, delay }: {
 
   return (
     <div
-      className="text-center p-6 rounded-xl border border-border bg-surface-light/20 hover:border-primary/30 hover:bg-surface-light/40 transition-all duration-300 group"
+      className="text-center p-6 rounded-xl border border-border bg-surface-light/20 hover:border-primary/30 hover:bg-surface-light/40 hover:scale-105 transition-all duration-300 group"
       style={{ animationDelay: `${delay}ms` }}
     >
-      <div className="inline-flex p-3 rounded-xl bg-primary/10 text-primary-light mb-4 group-hover:scale-110 transition-transform duration-300">
+      <div className="inline-flex p-3 rounded-xl bg-primary/10 text-primary-light mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
         <Icon size={24} />
       </div>
       <div className="text-4xl font-bold gradient-text mb-2">

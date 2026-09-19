@@ -80,7 +80,7 @@ export default function Work() {
               Selected <span className="gradient-text">work</span>
             </h2>
             <p className="text-text-muted max-w-xl">
-              Projects I've built — from production SaaS platforms to client websites.
+              Production projects I've built — from SaaS platforms to client websites.
             </p>
           </header>
 
@@ -88,7 +88,7 @@ export default function Work() {
             {projects.map((project, i) => (
               <article
                 key={project.id}
-                className={`group p-6 sm:p-8 rounded-xl border border-border bg-surface-light/20 hover:bg-surface-light/40 hover:border-primary/30 transition-all duration-300 ${
+                className={`group p-6 sm:p-8 rounded-xl border border-border bg-surface-light/20 hover:bg-surface-light/40 hover:border-primary/30 hover:scale-[1.01] transition-all duration-300 ${
                   project.featured ? 'ring-1 ring-primary/20' : ''
                 } ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}
                 style={{ animationDelay: `${i * 100}ms` }}
@@ -101,7 +101,7 @@ export default function Work() {
                         {project.name}
                       </h3>
                       {project.featured && (
-                        <span className="px-2 py-0.5 text-[10px] uppercase tracking-wider bg-primary/15 text-primary-light rounded-full font-medium">
+                        <span className="px-2 py-0.5 text-[10px] uppercase tracking-wider bg-primary/15 text-primary-light rounded-full font-medium animate-pulse">
                           Featured
                         </span>
                       )}
@@ -118,10 +118,10 @@ export default function Work() {
                       href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 text-sm text-primary-light hover:text-primary-light/80 transition-colors shrink-0 focus-visible:outline-primary-light"
+                      className="flex items-center gap-1.5 text-sm text-primary-light hover:text-primary-light/80 transition-colors shrink-0 focus-visible:outline-primary-light group/link"
                       aria-label={`View live site for ${project.name} (opens in new tab)`}
                     >
-                      <ExternalLink size={14} aria-hidden="true" />
+                      <ExternalLink size={14} className="group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" aria-hidden="true" />
                       Live
                     </a>
                   )}
@@ -141,7 +141,7 @@ export default function Work() {
                 <ul className="flex flex-wrap gap-2" aria-label={`Technologies used in ${project.name}`}>
                   {project.tags.map(tag => (
                     <li key={tag}>
-                      <span className="px-2.5 py-1 text-xs rounded-md bg-surface-lighter/50 text-text-muted border border-border">
+                      <span className="px-2.5 py-1 text-xs rounded-md bg-surface-lighter/50 text-text-muted border border-border group-hover:border-primary/20 transition-colors">
                         {tag}
                       </span>
                     </li>

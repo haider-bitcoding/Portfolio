@@ -3,6 +3,7 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import ScrollProgress from './components/ScrollProgress';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import TechMarquee from './components/TechMarquee';
 import About from './components/About';
 import Stats from './components/Stats';
 import Skills from './components/Skills';
@@ -27,6 +28,7 @@ export default function App() {
           <Navbar />
           <main id="main-content">
             <Hero />
+            <TechMarquee />
             <Stats />
             <About />
             <Skills />

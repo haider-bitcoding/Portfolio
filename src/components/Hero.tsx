@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { ArrowDown, MapPin, Github, Linkedin } from 'lucide-react';
+import MagneticButton from './MagneticButton';
+import { useMouseParallax } from '../hooks/useAnimations';
 
 export default function Hero() {
   const [terminalLines, setTerminalLines] = useState<number>(0);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const mousePosition = useMouseParallax(20);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -18,17 +20,6 @@ export default function Hero() {
       setTimeout(() => setTerminalLines(3), 2400),
     ];
     return () => timers.forEach(clearTimeout);
-  }, []);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth - 0.5) * 20,
-        y: (e.clientY / window.innerHeight - 0.5) * 20,
-      });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   return (
@@ -65,8 +56,8 @@ export default function Hero() {
           <div className="space-y-6">
             {/* Profile image - mobile */}
             <div className="lg:hidden flex justify-center mb-6">
-              <div className="relative">
-                <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-primary/30 glow">
+              <div className="relative animate-float">
+                <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-primary/30 animate-pulse-glow">
                   <img
                     src="/images/pp.jpg"
                     alt="Haider Ali"
@@ -81,26 +72,23 @@ export default function Hero() {
               </div>
             </div>
 
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-surface-light/50 text-sm text-text-muted backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-surface-light/50 text-sm text-text-muted backdrop-blur-sm animate-fade-in-up">
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" aria-hidden="true" />
-              Full-stack Developer
+              Associate Software Engineer
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-              Full-stack engineer who builds the backend most people skip past —{' '}
-              <span className="gradient-text">auth, data models, the AI layer</span>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+              Associate Software Engineer crafting{' '}
+              <span className="gradient-text">production-grade backend systems</span>{' '}
+              — then shipping the frontend on top.
             </h1>
 
-            <p className="text-xl text-text-muted">
-              then ships the frontend on top of it.
-            </p>
-
-            <p className="text-text-muted leading-relaxed max-w-lg">
-              Java, Spring Boot, and Next.js, end to end. Currently rebuilding my fundamentals from the ground up while shipping a production system, not another tutorial project.
+            <p className="text-lg text-text-muted leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+              I specialize in building robust APIs, authentication systems, and data models with Java & Spring Boot, then delivering polished full-stack applications with React & Next.js. Currently rebuilding my fundamentals while shipping real production code.
             </p>
 
             {/* Stats */}
-            <dl className="flex flex-wrap gap-6 pt-2">
+            <dl className="flex flex-wrap gap-6 pt-2 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
               <div className="flex items-center gap-2 text-sm">
                 <dt className="sr-only">Location</dt>
                 <MapPin size={14} className="text-primary-light" aria-hidden="true" />
@@ -123,23 +111,23 @@ export default function Hero() {
             </dl>
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-3 pt-4">
-              <a
+            <div className="flex flex-wrap gap-3 pt-4 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+              <MagneticButton
                 href="#work"
-                className="px-6 py-3 bg-primary hover:bg-primary-dark text-white rounded-lg font-medium transition-all duration-200 hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5 focus-visible:outline-primary-light"
+                className="px-6 py-3 bg-primary hover:bg-primary-dark text-white rounded-lg font-medium transition-all duration-200 hover:shadow-lg hover:shadow-primary/25 focus-visible:outline-primary-light"
               >
                 See my work
-              </a>
-              <a
+              </MagneticButton>
+              <MagneticButton
                 href="mailto:haiderali.dev.se@gmail.com"
-                className="px-6 py-3 border border-border hover:border-primary/50 text-text rounded-lg font-medium transition-all duration-200 hover:bg-surface-light hover:-translate-y-0.5 focus-visible:outline-primary-light"
+                className="px-6 py-3 border border-border hover:border-primary/50 text-text rounded-lg font-medium transition-all duration-200 hover:bg-surface-light focus-visible:outline-primary-light"
               >
                 Email me
-              </a>
+              </MagneticButton>
             </div>
 
             {/* Social links */}
-            <div className="flex gap-4 pt-2">
+            <div className="flex gap-4 pt-2 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
               <a
                 href="https://www.linkedin.com/in/ihaiderr"
                 target="_blank"
@@ -165,8 +153,8 @@ export default function Hero() {
           <div className="hidden lg:block space-y-6">
             {/* Profile image */}
             <div className="flex justify-center">
-              <div className="relative">
-                <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-primary/30 glow">
+              <div className="relative animate-float">
+                <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-primary/30 animate-pulse-glow">
                   <img
                     src="/images/pp.jpg"
                     alt="Haider Ali"
@@ -196,7 +184,7 @@ export default function Hero() {
                 </div>
                 {terminalLines >= 1 && (
                   <div className="animate-fade-in-up text-text-muted pl-4">
-                    Haider Ali — Backend-leaning full-stack engineer
+                    Haider Ali — Associate Software Engineer
                   </div>
                 )}
                 {terminalLines >= 2 && (

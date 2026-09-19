@@ -5,9 +5,9 @@ const skillGroups = [
     key: 'languages',
     title: 'Languages',
     items: [
-      { name: 'Java', primary: true, level: 'Expert', years: 4, percentage: 95 },
-      { name: 'JavaScript', primary: true, level: 'Advanced', years: 3, percentage: 85 },
-      { name: 'SQL', primary: true, level: 'Expert', years: 4, percentage: 90 },
+      { name: 'Java', primary: true, level: 'Expert', years: 1, percentage: 95 },
+      { name: 'JavaScript', primary: true, level: 'Advanced', years: 1, percentage: 85 },
+      { name: 'SQL', primary: true, level: 'Expert', years: 1, percentage: 90 },
       { name: 'Python', percentage: 60 },
     ],
   },
@@ -15,8 +15,8 @@ const skillGroups = [
     key: 'backend',
     title: 'Backend',
     items: [
-      { name: 'Spring Boot', primary: true, level: 'Expert', years: 4, percentage: 95 },
-      { name: 'REST APIs', primary: true, level: 'Expert', years: 4, percentage: 95 },
+      { name: 'Spring Boot', primary: true, level: 'Expert', years: 1, percentage: 95 },
+      { name: 'REST APIs', primary: true, level: 'Expert', years: 1, percentage: 95 },
       { name: 'JWT / OAuth2', percentage: 85 },
       { name: 'Hibernate/JPA', percentage: 80 },
       { name: 'Node.js / Express', percentage: 75 },
@@ -26,8 +26,8 @@ const skillGroups = [
     key: 'frontend',
     title: 'Frontend',
     items: [
-      { name: 'React', primary: true, level: 'Advanced', years: 3, percentage: 85 },
-      { name: 'Next.js', primary: true, level: 'Advanced', years: 3, percentage: 85 },
+      { name: 'React', primary: true, level: 'Advanced', years: 1, percentage: 85 },
+      { name: 'Next.js', primary: true, level: 'Advanced', years: 1, percentage: 85 },
       { name: 'Vue.js', percentage: 70 },
       { name: 'HTML5 / CSS3', percentage: 90 },
     ],
@@ -36,7 +36,7 @@ const skillGroups = [
     key: 'data',
     title: 'Data',
     items: [
-      { name: 'PostgreSQL', primary: true, level: 'Expert', years: 4, percentage: 90 },
+      { name: 'PostgreSQL', primary: true, level: 'Expert', years: 1, percentage: 90 },
       { name: 'MySQL', percentage: 80 },
       { name: 'MongoDB', percentage: 75 },
     ],
@@ -45,7 +45,7 @@ const skillGroups = [
     key: 'tooling',
     title: 'Tooling',
     items: [
-      { name: 'Git/GitHub', primary: true, level: 'Expert', years: 5, percentage: 95 },
+      { name: 'Git/GitHub', primary: true, level: 'Expert', years: 1, percentage: 95 },
       { name: 'Docker', percentage: 75 },
       { name: 'Vercel / Render', percentage: 80 },
       { name: 'Swagger/OpenAPI', percentage: 85 },

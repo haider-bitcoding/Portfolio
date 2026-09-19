@@ -1,7 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
-import { GraduationCap, Calendar, Award } from 'lucide-react';
+import { GraduationCap, Calendar, Award, BookOpen } from 'lucide-react';
 
 const items = [
+  {
+    name: 'Virtual University of Pakistan',
+    sub: 'Associate Degree in Computing — Currently enrolled',
+    date: 'Sep 2026 – Aug 2028',
+    icon: BookOpen,
+    ongoing: true,
+  },
   {
     name: 'Shenzhen University of Information and Technology',
     sub: 'Associate Engineering, DAE Software Engineering (Joint Program) — Shenzhen, China · Avg. score 93.6%',
@@ -73,15 +80,22 @@ export default function Education() {
                 >
                   {/* Timeline dot */}
                   <div className="hidden sm:flex items-start pt-1.5 shrink-0" aria-hidden="true">
-                    <div className="w-10 h-10 rounded-full border-2 border-primary/30 bg-surface flex items-center justify-center">
-                      <item.icon size={16} className="text-primary-light" />
+                    <div className={`w-10 h-10 rounded-full border-2 ${item.ongoing ? 'border-accent bg-accent/10' : 'border-primary/30 bg-surface'} flex items-center justify-center`}>
+                      <item.icon size={16} className={item.ongoing ? 'text-accent' : 'text-primary-light'} />
                     </div>
                   </div>
 
                   {/* Content card */}
-                  <div className="flex-1 p-5 rounded-xl border border-border bg-surface-light/20 hover:bg-surface-light/40 hover:border-primary/20 transition-all duration-300">
+                  <div className={`flex-1 p-5 rounded-xl border ${item.ongoing ? 'border-accent/30 bg-accent/5' : 'border-border bg-surface-light/20'} hover:bg-surface-light/40 hover:border-primary/20 transition-all duration-300`}>
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-                      <h3 className="font-semibold text-lg">{item.name}</h3>
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-semibold text-lg">{item.name}</h3>
+                        {item.ongoing && (
+                          <span className="px-2 py-0.5 text-[10px] uppercase tracking-wider bg-accent/15 text-accent rounded-full font-medium animate-pulse">
+                            Ongoing
+                          </span>
+                        )}
+                      </div>
                       <time className="text-xs text-text-muted font-mono bg-surface-lighter/50 px-2 py-1 rounded shrink-0">
                         {item.date}
                       </time>

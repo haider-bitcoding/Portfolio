@@ -6,7 +6,7 @@ const tiles = [
     id: 'intro',
     icon: Code2,
     label: 'Profile',
-    heading: 'Software engineer building clean, reliable backend systems.',
+    heading: 'Associate Software Engineer building clean, reliable backend systems.',
     copy: 'I build things end to end — data modeling, REST APIs, auth, and the frontend that sits on top of it. Spring Boot and Java on the backend, React and Next.js on the frontend, backed by PostgreSQL or MongoDB.',
     span: 'lg:col-span-2',
   },
@@ -39,7 +39,7 @@ const tiles = [
     icon: GraduationCap,
     label: 'Education',
     heading: 'Software engineering, Shenzhen',
-    copy: 'A year in Shenzhen, China — advanced programming coursework, cross-cultural projects, HSK Level 3 Mandarin.',
+    copy: 'A year in Shenzhen, China — advanced programming coursework, cross-cultural projects, HSK Level 3 Mandarin. Currently pursuing Associate Degree in Computing at Virtual University.',
     span: '',
   },
 ];
@@ -81,11 +81,11 @@ export default function About() {
               <article
                 key={tile.id}
                 role="listitem"
-                className={`group p-6 rounded-xl border border-border bg-surface-light/30 hover:bg-surface-light/60 hover:border-primary/30 transition-all duration-300 ${tile.span} ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}
+                className={`group p-6 rounded-xl border border-border bg-surface-light/30 hover:bg-surface-light/60 hover:border-primary/30 hover:scale-[1.02] transition-all duration-300 ${tile.span} ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}
                 style={{ animationDelay: `${i * 100}ms` }}
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="p-2 rounded-lg bg-primary/10 text-primary-light" aria-hidden="true">
+                  <div className="p-2 rounded-lg bg-primary/10 text-primary-light group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300" aria-hidden="true">
                     <tile.icon size={18} />
                   </div>
                   <span className="text-xs uppercase tracking-wider text-text-muted font-medium">
