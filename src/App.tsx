@@ -1,5 +1,25 @@
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import About from './components/About';
+import Skills from './components/Skills';
+import Work from './components/Work';
+import Currently from './components/Currently';
+import Education from './components/Education';
+import Contact from './components/Contact';
+
 export default function App() {
   return (
-    <div/>
+    <div className="min-h-screen bg-[#020617] text-text antialiased">
+      <Navbar />
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Work />
+        <Currently />
+        <Education />
+        <Contact />
+      </main>
+    </div>
   );
 }
