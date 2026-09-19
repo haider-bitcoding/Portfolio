@@ -5,6 +5,7 @@ import { useMouseParallax } from "../hooks/useAnimations";
 
 export default function Hero() {
   const [terminalLines, setTerminalLines] = useState<number>(0);
+  const [imageFailed, setImageFailed] = useState(false);
   const mousePosition = useMouseParallax(20);
 
   useEffect(() => {
@@ -63,16 +64,18 @@ export default function Hero() {
             <div className="lg:hidden flex justify-center mb-6">
               <div className="relative animate-float">
                 <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-primary/30 animate-pulse-glow">
-                  <img
-                    src={`images/pp.jpg`}
-                    alt="Haider Ali"
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.currentTarget.style.display = "none";
-                      e.currentTarget.parentElement!.innerHTML =
-                        '<div class="w-full h-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-4xl font-bold text-white">HA</div>';
-                    }}
-                  />
+                  {imageFailed ? (
+                    <div className="w-full h-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-4xl font-bold text-white">
+                      HA
+                    </div>
+                  ) : (
+                    <img
+                      src={`${import.meta.env.BASE_URL}images/pp.jpg`}
+                      alt="Haider Ali"
+                      className="w-full h-full object-cover"
+                      onError={() => setImageFailed(true)}
+                    />
+                  )}
                 </div>
                 <div className="absolute -bottom-1 -right-1 w-8 h-8 bg-green-500 rounded-full border-4 border-surface animate-pulse" />
               </div>
@@ -190,16 +193,18 @@ export default function Hero() {
             <div className="flex justify-center">
               <div className="relative animate-float">
                 <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-primary/30 animate-pulse-glow">
-                  <img
-                    src={`${import.meta.env.BASE_URL}images/pp.jpg`}
-                    alt="Haider Ali"
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.currentTarget.style.display = "none";
-                      e.currentTarget.parentElement!.innerHTML =
-                        '<div class="w-full h-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-6xl font-bold text-white">HA</div>';
-                    }}
-                  />
+                  {imageFailed ? (
+                    <div className="w-full h-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-6xl font-bold text-white">
+                      HA
+                    </div>
+                  ) : (
+                    <img
+                      src={`${import.meta.env.BASE_URL}images/pp.jpg`}
+                      alt="Haider Ali"
+                      className="w-full h-full object-cover"
+                      onError={() => setImageFailed(true)}
+                    />
+                  )}
                 </div>
                 <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-green-500 rounded-full border-4 border-surface animate-pulse" />
               </div>

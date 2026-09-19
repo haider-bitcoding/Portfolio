@@ -1,7 +1,7 @@
 # robots.txt for Haider Ali's portfolio
-# https://haider-bitcoding.github.io/haider-portfolio/
+# https://haider-bitcoding.github.io/Portfolio/
 
 User-agent: *
 Allow: /
 
-Sitemap: https://haider-bitcoding.github.io/haider-portfolio/sitemap.xml
+Sitemap: https://haider-bitcoding.github.io/Portfolio/sitemap.xml

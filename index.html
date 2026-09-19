@@ -20,9 +20,10 @@
     />
     <meta name="author" content="Haider Ali" />
     <meta name="robots" content="index, follow" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link
       rel="canonical"
-      href="https://haider-bitcoding.github.io/haider-portfolio/"
+      href="https://haider-bitcoding.github.io/Portfolio/"
     />
 
     <!-- Favicon (inline SVG) -->
@@ -48,7 +49,7 @@
     <meta property="og:type" content="website" />
     <meta
       property="og:url"
-      content="https://haider-bitcoding.github.io/haider-portfolio/"
+      content="https://haider-bitcoding.github.io/Portfolio/"
     />
     <meta
       property="og:title"
@@ -60,12 +61,16 @@
     />
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="Haider Ali" />
+    <meta
+      property="og:image"
+      content="https://haider-bitcoding.github.io/Portfolio/images/pp.jpg"
+    />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:url"
-      content="https://haider-bitcoding.github.io/haider-portfolio/"
+      content="https://haider-bitcoding.github.io/Portfolio/"
     />
     <meta
       name="twitter:title"
@@ -75,6 +80,10 @@
       name="twitter:description"
       content="Full-stack engineer building the backend most people skip past — auth, data models, the AI layer — then shipping the frontend on top."
     />
+    <meta
+      name="twitter:image"
+      content="https://haider-bitcoding.github.io/Portfolio/images/pp.jpg"
+    />
 
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
@@ -82,7 +91,7 @@
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Haider Ali",
-        "url": "https://haider-bitcoding.github.io/haider-portfolio/",
+        "url": "https://haider-bitcoding.github.io/Portfolio/",
         "jobTitle": "Software Engineer",
         "email": "mailto:haiderali.dev.se@gmail.com",
         "telephone": "+923044122641",
@@ -138,7 +147,10 @@
     <script>
       // Apply theme immediately to prevent flash
       (function () {
-        const saved = localStorage.getItem("theme");
+        let saved = null;
+        try {
+          saved = localStorage.getItem("theme");
+        } catch {}
         const prefersDark = window.matchMedia(
           "(prefers-color-scheme: dark)",
         ).matches;

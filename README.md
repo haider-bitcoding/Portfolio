@@ -2,7 +2,7 @@
 
 Full-stack software engineer portfolio built with React, TypeScript, Vite, and Tailwind CSS.
 
-🌐 **Live**: [https://haider-bitcoding.github.io/haider-portfolio/](https://haider-bitcoding.github.io/haider-portfolio/)
+🌐 **Live**: [https://haider-bitcoding.github.io/Portfolio/](https://haider-bitcoding.github.io/Portfolio/)
 
 ---
 
@@ -188,18 +188,6 @@ Edit `index.html` Google Fonts link and `src/index.css` `font-family`.
 ### Update profile image
 
 Replace `/public/images/pp.jpg` with your own photo. The component has a fallback that shows initials if the image fails to load.
-
----
-
-## 🔄 Next.js Migration
-
-Want to convert this to Next.js for static export? See [`GITHUB_PAGES.md`](./GITHUB_PAGES.md) for a complete step-by-step runbook.
-
----
-
-## 📄 License
-
-MIT — use freely for your own portfolio.
 
 ---
 

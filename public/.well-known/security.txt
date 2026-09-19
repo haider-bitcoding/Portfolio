@@ -1,0 +1,3 @@
+Contact: mailto:haiderali.dev.se@gmail.com
+Preferred-Languages: en
+Canonical: https://haider-bitcoding.github.io/Portfolio/.well-known/security.txt
