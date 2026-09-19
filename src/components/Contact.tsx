@@ -36,7 +36,7 @@ export default function Contact() {
                   Get in <span className="gradient-text">touch</span>
                 </h2>
                 <p className="text-text-muted max-w-lg leading-relaxed">
-                  As an Associate Software Engineer, I'm open to junior/graduate roles and freelance backend or full-stack work. Reach out directly — I usually reply within a day.
+                  As an Associate Software Engineer, I'm open to software engineer roles and freelance backend or full-stack work. Reach out directly — I usually reply within a day.
                 </p>
               </header>
 
@@ -110,7 +110,7 @@ export default function Contact() {
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" aria-hidden="true" />
                   <p className="text-sm text-text-muted">
-                    Status: <span className="text-text font-medium">open to junior roles & freelance work</span>
+                    Status: <span className="text-text font-medium">open to software roles & freelance work</span>
                   </p>
                 </div>
               </div>

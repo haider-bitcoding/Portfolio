@@ -22,7 +22,7 @@ const tiles = [
     id: 'stack',
     icon: Layers,
     label: 'Primary stack',
-    heading: 'Java, Spring Boot, Next.js',
+    heading: 'MERN, Java, Spring Boot, Next.js',
     copy: '',
     span: '',
   },

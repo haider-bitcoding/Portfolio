@@ -1,60 +1,118 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 const skillGroups = [
   {
-    key: 'languages',
-    title: 'Languages',
+    key: "languages",
+    title: "Languages",
     items: [
-      { name: 'Java', primary: true, level: 'Expert', years: 1, percentage: 95 },
-      { name: 'JavaScript', primary: true, level: 'Advanced', years: 1, percentage: 85 },
-      { name: 'SQL', primary: true, level: 'Expert', years: 1, percentage: 90 },
-      { name: 'Python', percentage: 60 },
+      {
+        name: "Java",
+        primary: true,
+        level: "Expert",
+        years: 1,
+        percentage: 85,
+      },
+      {
+        name: "JavaScript",
+        primary: true,
+        level: "Advanced",
+        years: 1,
+        percentage: 85,
+      },
+      { name: "SQL", primary: true, level: "Expert", years: 1, percentage: 85 },
+      { name: "Python", percentage: 60 },
     ],
   },
   {
-    key: 'backend',
-    title: 'Backend',
+    key: "backend",
+    title: "Backend",
     items: [
-      { name: 'Spring Boot', primary: true, level: 'Expert', years: 1, percentage: 95 },
-      { name: 'REST APIs', primary: true, level: 'Expert', years: 1, percentage: 95 },
-      { name: 'JWT / OAuth2', percentage: 85 },
-      { name: 'Hibernate/JPA', percentage: 80 },
-      { name: 'Node.js / Express', percentage: 75 },
+      {
+        name: "Spring Boot",
+        primary: true,
+        level: "Expert",
+        years: 1,
+        percentage: 85,
+      },
+      {
+        name: "REST APIs",
+        primary: true,
+        level: "Expert",
+        years: 1,
+        percentage: 85,
+      },
+      { name: "JWT / OAuth2", percentage: 85 },
+      { name: "Hibernate/JPA", percentage: 80 },
+      { name: "Node.js / Express", percentage: 75 },
     ],
   },
   {
-    key: 'frontend',
-    title: 'Frontend',
+    key: "frontend",
+    title: "Frontend",
     items: [
-      { name: 'React', primary: true, level: 'Advanced', years: 1, percentage: 85 },
-      { name: 'Next.js', primary: true, level: 'Advanced', years: 1, percentage: 85 },
-      { name: 'Vue.js', percentage: 70 },
-      { name: 'HTML5 / CSS3', percentage: 90 },
+      {
+        name: "React",
+        primary: true,
+        level: "Advanced",
+        years: 1,
+        percentage: 80,
+      },
+      {
+        name: "Next.js",
+        primary: true,
+        level: "Advanced",
+        years: 1,
+        percentage: 80,
+      },
+      { name: "Vue.js", percentage: 60 },
+      { name: "HTML5 / CSS3", percentage: 90 },
     ],
   },
   {
-    key: 'data',
-    title: 'Data',
+    key: "data",
+    title: "Data",
     items: [
-      { name: 'PostgreSQL', primary: true, level: 'Expert', years: 1, percentage: 90 },
-      { name: 'MySQL', percentage: 80 },
-      { name: 'MongoDB', percentage: 75 },
+      {
+        name: "PostgreSQL",
+        primary: true,
+        level: "Expert",
+        years: 1,
+        percentage: 80,
+      },
+      { name: "MySQL", percentage: 80 },
+      { name: "MongoDB", percentage: 70 },
     ],
   },
   {
-    key: 'tooling',
-    title: 'Tooling',
+    key: "tooling",
+    title: "Tooling",
     items: [
-      { name: 'Git/GitHub', primary: true, level: 'Expert', years: 1, percentage: 95 },
-      { name: 'Docker', percentage: 75 },
-      { name: 'Vercel / Render', percentage: 80 },
-      { name: 'Swagger/OpenAPI', percentage: 85 },
-      { name: 'LLM API Integration', percentage: 70 },
+      {
+        name: "Git/GitHub",
+        primary: true,
+        level: "Expert",
+        years: 1,
+        percentage: 95,
+      },
+      { name: "Docker", percentage: 60 },
+      { name: "Vercel / Render", percentage: 70 },
+      { name: "Swagger/OpenAPI", percentage: 55 },
+      { name: "LLM API Integration", percentage: 65 },
     ],
   },
 ];
 
-function SkillBar({ name, percentage, level, delay }: { name: string; percentage: number; level?: string; delay: number }) {
+function SkillBar({
+  name,
+  percentage,
+  level,
+  delay,
+}: {
+  name: string;
+  percentage: number;
+  level?: string;
+  delay: number;
+}) {
   const [width, setWidth] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -65,7 +123,7 @@ function SkillBar({ name, percentage, level, delay }: { name: string; percentage
           setTimeout(() => setWidth(percentage), delay);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     if (ref.current) observer.observe(ref.current);
@@ -99,26 +157,40 @@ export default function Skills() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     if (prefersReducedMotion) {
       setVisible(true);
       return;
     }
 
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.1 }
+      ([entry]) => {
+        if (entry.isIntersecting) setVisible(true);
+      },
+      { threshold: 0.1 },
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section id="skills" className="py-24 relative" aria-labelledby="skills-heading" ref={ref}>
+    <section
+      id="skills"
+      className="py-24 relative"
+      aria-labelledby="skills-heading"
+      ref={ref}
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className={`transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div
+          className={`transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+        >
           <header className="mb-10">
-            <h2 id="skills-heading" className="text-3xl sm:text-4xl font-bold mb-2">
+            <h2
+              id="skills-heading"
+              className="text-3xl sm:text-4xl font-bold mb-2"
+            >
               What I build <span className="gradient-text">with</span>
             </h2>
             <p className="text-text-muted max-w-xl">
@@ -130,7 +202,7 @@ export default function Skills() {
             {skillGroups.map((group, gi) => (
               <div
                 key={group.key}
-                className={`p-6 rounded-xl border border-border bg-surface-light/20 hover:border-primary/30 transition-all duration-300 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}
+                className={`p-6 rounded-xl border border-border bg-surface-light/20 hover:border-primary/30 transition-all duration-300 ${visible ? "animate-fade-in-up" : "opacity-0"}`}
                 style={{ animationDelay: `${gi * 100}ms` }}
               >
                 <h3 className="text-sm uppercase tracking-wider text-text-muted font-medium mb-5">

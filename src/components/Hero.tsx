@@ -127,17 +127,17 @@ export default function Hero() {
               <div className="text-sm">
                 <dt className="sr-only">Tech stack</dt>
                 <dd>
-                  <span className="text-text-muted">stack: </span>
+                  <span className="text-text-muted">Stack: </span>
                   <span className="text-text">
-                    Java · Spring Boot · Next.js
+                    MERN, Java, Spring Boot, Next.js
                   </span>
                 </dd>
               </div>
               <div className="text-sm">
                 <dt className="sr-only">Availability</dt>
                 <dd>
-                  <span className="text-text-muted">open to: </span>
-                  <span className="text-text">junior + freelance</span>
+                  <span className="text-text-muted">Open to: </span>
+                  <span className="text-text">Software Roles + freelance</span>
                 </dd>
               </div>
             </dl>
