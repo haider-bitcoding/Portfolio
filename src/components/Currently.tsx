@@ -6,6 +6,12 @@ export default function Currently() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      setVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setVisible(true); },
       { threshold: 0.2 }
@@ -15,27 +21,27 @@ export default function Currently() {
   }, []);
 
   return (
-    <section id="currently" className="py-24 relative" ref={ref}>
+    <section id="currently" className="py-24 relative" aria-labelledby="currently-heading" ref={ref}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className={`transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="relative p-8 sm:p-12 rounded-2xl border border-border bg-surface-light/20 overflow-hidden">
-            {/* Background decoration */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px]" />
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-accent/5 rounded-full blur-[60px]" />
+            {/* Background decoration — decorative only */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px]" aria-hidden="true" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-accent/5 rounded-full blur-[60px]" aria-hidden="true" />
 
             <div className="relative z-10">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-2.5 rounded-xl bg-primary/10 text-primary-light">
+              <header className="flex items-center gap-3 mb-6">
+                <div className="p-2.5 rounded-xl bg-primary/10 text-primary-light" aria-hidden="true">
                   <Wrench size={22} />
                 </div>
-                <h2 className="text-3xl sm:text-4xl font-bold">
+                <h2 id="currently-heading" className="text-3xl sm:text-4xl font-bold">
                   Currently <span className="gradient-text">building</span>
                 </h2>
-              </div>
+              </header>
 
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="mt-1 p-1.5 rounded-lg bg-accent/10 text-accent shrink-0">
+                  <div className="mt-1 p-1.5 rounded-lg bg-accent/10 text-accent shrink-0" aria-hidden="true">
                     <Target size={16} />
                   </div>
                   <div>
@@ -46,24 +52,24 @@ export default function Currently() {
                   </div>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-4 pt-4">
+                <dl className="grid sm:grid-cols-2 gap-4 pt-4">
                   <div className="p-4 rounded-xl bg-surface-lighter/30 border border-border/50">
-                    <p className="text-xs uppercase tracking-wider text-text-muted mb-1">Target Role</p>
-                    <p className="font-medium">Full Stack Engineer</p>
+                    <dt className="text-xs uppercase tracking-wider text-text-muted mb-1">Target Role</dt>
+                    <dd className="font-medium">Full Stack Engineer</dd>
                   </div>
                   <div className="p-4 rounded-xl bg-surface-lighter/30 border border-border/50">
-                    <p className="text-xs uppercase tracking-wider text-text-muted mb-1">Level</p>
-                    <p className="font-medium text-sm">Intermediate to Senior — rebuilding fundamentals while shipping production systems</p>
+                    <dt className="text-xs uppercase tracking-wider text-text-muted mb-1">Level</dt>
+                    <dd className="font-medium text-sm">Intermediate to Senior — rebuilding fundamentals while shipping production systems</dd>
                   </div>
                   <div className="p-4 rounded-xl bg-surface-lighter/30 border border-border/50">
-                    <p className="text-xs uppercase tracking-wider text-text-muted mb-1">Availability</p>
-                    <p className="font-medium text-sm">Junior/graduate roles · freelance projects</p>
+                    <dt className="text-xs uppercase tracking-wider text-text-muted mb-1">Availability</dt>
+                    <dd className="font-medium text-sm">Junior/graduate roles · freelance projects</dd>
                   </div>
                   <div className="p-4 rounded-xl bg-surface-lighter/30 border border-border/50">
-                    <p className="text-xs uppercase tracking-wider text-text-muted mb-1">Focus</p>
-                    <p className="font-medium text-sm">Backend systems, full-stack apps, AI integration</p>
+                    <dt className="text-xs uppercase tracking-wider text-text-muted mb-1">Focus</dt>
+                    <dd className="font-medium text-sm">Backend systems, full-stack apps, AI integration</dd>
                   </div>
-                </div>
+                </dl>
               </div>
             </div>
           </div>

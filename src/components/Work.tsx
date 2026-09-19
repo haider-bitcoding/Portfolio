@@ -57,6 +57,12 @@ export default function Work() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      setVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setVisible(true); },
       { threshold: 0.05 }
@@ -66,28 +72,31 @@ export default function Work() {
   }, []);
 
   return (
-    <section id="work" className="py-24 relative" ref={ref}>
+    <section id="work" className="py-24 relative" aria-labelledby="work-heading" ref={ref}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className={`transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-2">
-            Selected <span className="gradient-text">work</span>
-          </h2>
-          <p className="text-text-muted mb-10 max-w-xl">
-            Projects I've built — from production SaaS platforms to client websites.
-          </p>
+          <header className="mb-10">
+            <h2 id="work-heading" className="text-3xl sm:text-4xl font-bold mb-2">
+              Selected <span className="gradient-text">work</span>
+            </h2>
+            <p className="text-text-muted max-w-xl">
+              Projects I've built — from production SaaS platforms to client websites.
+            </p>
+          </header>
 
           <div className="space-y-6">
             {projects.map((project, i) => (
-              <div
+              <article
                 key={project.id}
                 className={`group p-6 sm:p-8 rounded-xl border border-border bg-surface-light/20 hover:bg-surface-light/40 hover:border-primary/30 transition-all duration-300 ${
                   project.featured ? 'ring-1 ring-primary/20' : ''
                 } ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}
                 style={{ animationDelay: `${i * 100}ms` }}
+                aria-label={`Project: ${project.name}`}
               >
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
                   <div>
-                    <div className="flex items-center gap-3 mb-1">
+                    <div className="flex items-center gap-3 mb-1 flex-wrap">
                       <h3 className="text-xl font-bold group-hover:text-primary-light transition-colors">
                         {project.name}
                       </h3>
@@ -109,17 +118,18 @@ export default function Work() {
                       href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 text-sm text-primary-light hover:text-primary-light/80 transition-colors shrink-0"
+                      className="flex items-center gap-1.5 text-sm text-primary-light hover:text-primary-light/80 transition-colors shrink-0 focus-visible:outline-primary-light"
+                      aria-label={`View live site for ${project.name} (opens in new tab)`}
                     >
-                      <ExternalLink size={14} />
+                      <ExternalLink size={14} aria-hidden="true" />
                       Live
                     </a>
                   )}
                 </div>
 
                 {project.metrics && (
-                  <div className="flex items-center gap-2 mb-3 text-sm">
-                    <TrendingUp size={14} className="text-accent" />
+                  <div className="flex items-start gap-2 mb-3 text-sm">
+                    <TrendingUp size={14} className="text-accent mt-0.5 shrink-0" aria-hidden="true" />
                     <span className="text-accent/80">{project.metrics}</span>
                   </div>
                 )}
@@ -128,17 +138,16 @@ export default function Work() {
                   {project.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2">
+                <ul className="flex flex-wrap gap-2" aria-label={`Technologies used in ${project.name}`}>
                   {project.tags.map(tag => (
-                    <span
-                      key={tag}
-                      className="px-2.5 py-1 text-xs rounded-md bg-surface-lighter/50 text-text-muted border border-border"
-                    >
-                      {tag}
-                    </span>
+                    <li key={tag}>
+                      <span className="px-2.5 py-1 text-xs rounded-md bg-surface-lighter/50 text-text-muted border border-border">
+                        {tag}
+                      </span>
+                    </li>
                   ))}
-                </div>
-              </div>
+                </ul>
+              </article>
             ))}
           </div>
         </div>

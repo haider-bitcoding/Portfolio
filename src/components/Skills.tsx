@@ -64,6 +64,12 @@ export default function Skills() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      setVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setVisible(true); },
       { threshold: 0.1 }
@@ -73,15 +79,17 @@ export default function Skills() {
   }, []);
 
   return (
-    <section id="skills" className="py-24 relative" ref={ref}>
+    <section id="skills" className="py-24 relative" aria-labelledby="skills-heading" ref={ref}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className={`transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-2">
-            What I build <span className="gradient-text">with</span>
-          </h2>
-          <p className="text-text-muted mb-10 max-w-xl">
-            Technologies and tools I use to build production-ready systems.
-          </p>
+          <header className="mb-10">
+            <h2 id="skills-heading" className="text-3xl sm:text-4xl font-bold mb-2">
+              What I build <span className="gradient-text">with</span>
+            </h2>
+            <p className="text-text-muted max-w-xl">
+              Technologies and tools I use to build production-ready systems.
+            </p>
+          </header>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {skillGroups.map((group, gi) => (
@@ -93,26 +101,28 @@ export default function Skills() {
                 <h3 className="text-sm uppercase tracking-wider text-text-muted font-medium mb-4">
                   {group.title}
                 </h3>
-                <div className="flex flex-wrap gap-2">
+                <ul className="flex flex-wrap gap-2" aria-label={`${group.title} skills`}>
                   {group.items.map((item) => (
-                    <span
-                      key={item.name}
-                      className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-                        item.primary
-                          ? 'bg-primary/15 text-primary-light border border-primary/20 hover:bg-primary/25'
-                          : 'bg-surface-lighter/50 text-text-muted border border-border hover:text-text hover:border-text-muted'
-                      }`}
-                      title={item.level ? `${item.level} · ${item.years} years` : ''}
-                    >
-                      {item.name}
-                      {item.level && (
-                        <span className="ml-1 text-[10px] opacity-60">
-                          {item.level}
-                        </span>
-                      )}
-                    </span>
+                    <li key={item.name}>
+                      <span
+                        className={`inline-block px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+                          item.primary
+                            ? 'bg-primary/15 text-primary-light border border-primary/20 hover:bg-primary/25'
+                            : 'bg-surface-lighter/50 text-text-muted border border-border hover:text-text hover:border-text-muted'
+                        }`}
+                        title={item.level ? `${item.level} · ${item.years} years` : undefined}
+                        aria-label={item.level ? `${item.name}, ${item.level}, ${item.years} years` : item.name}
+                      >
+                        {item.name}
+                        {item.level && (
+                          <span className="ml-1 text-[10px] opacity-60">
+                            {item.level}
+                          </span>
+                        )}
+                      </span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
             ))}
           </div>

@@ -21,6 +21,8 @@ body {
   background-color: #020617;
   color: #f1f5f9;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .font-mono {
@@ -40,6 +42,36 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #475569;
+}
+
+/* Focus visible — keyboard-only focus ring */
+*:focus-visible {
+  outline: 2px solid #818cf8;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Remove focus ring for mouse users */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Skip to content link */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #6366f1;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  z-index: 100;
+  font-weight: 500;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
 }
 
 /* Terminal cursor blink */
@@ -63,6 +95,7 @@ body {
 .glass {
   background: rgba(15, 23, 42, 0.8);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(51, 65, 85, 0.5);
 }
 
@@ -73,22 +106,10 @@ body {
 
 /* Grid pattern background */
 .grid-bg {
-  background-image: 
+  background-image:
     linear-gradient(rgba(51, 65, 85, 0.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(51, 65, 85, 0.1) 1px, transparent 1px);
   background-size: 60px 60px;
-}
-
-/* Typing animation */
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-.typing-animation {
-  overflow: hidden;
-  white-space: nowrap;
-  animation: typing 1.5s steps(40, end);
 }
 
 /* Fade in up animation */
@@ -102,21 +123,8 @@ body {
     transform: translateY(0);
   }
 }
-
 .animate-fade-in-up {
   animation: fadeInUp 0.6s ease-out forwards;
-}
-
-/* Section reveal */
-.section-reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.section-reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* Section dividers */
@@ -133,4 +141,63 @@ section + section {
 /* Smooth link transitions */
 a {
   transition: color 0.2s ease;
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  html { scroll-behavior: auto; }
+  .animate-fade-in-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .cursor-blink {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+  }
+  nav, .skip-link, .cursor-blink, button {
+    display: none !important;
+  }
+  section {
+    page-break-inside: avoid;
+    border: none !important;
+    padding: 1rem 0 !important;
+  }
+  .glass, .glow {
+    background: white !important;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
+  .gradient-text {
+    -webkit-text-fill-color: #4f46e5 !important;
+    color: #4f46e5 !important;
+  }
+  a {
+    color: #4f46e5 !important;
+    text-decoration: underline;
+  }
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+  a[href^="#"]::after,
+  a[href^="mailto"]::after {
+    content: "";
+  }
 }

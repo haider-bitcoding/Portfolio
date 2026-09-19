@@ -49,6 +49,12 @@ export default function About() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      setVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setVisible(true); },
       { threshold: 0.1 }
@@ -58,25 +64,28 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" className="py-24 relative" ref={ref}>
+    <section id="about" className="py-24 relative" aria-labelledby="about-heading" ref={ref}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className={`transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-2">
-            Who I <span className="gradient-text">am</span>
-          </h2>
-          <p className="text-text-muted mb-10 max-w-xl">
-            A quick snapshot of who I am, what I build with, and where I'm headed.
-          </p>
+          <header className="mb-10">
+            <h2 id="about-heading" className="text-3xl sm:text-4xl font-bold mb-2">
+              Who I <span className="gradient-text">am</span>
+            </h2>
+            <p className="text-text-muted max-w-xl">
+              A quick snapshot of who I am, what I build with, and where I'm headed.
+            </p>
+          </header>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4" role="list">
             {tiles.map((tile, i) => (
-              <div
+              <article
                 key={tile.id}
+                role="listitem"
                 className={`group p-6 rounded-xl border border-border bg-surface-light/30 hover:bg-surface-light/60 hover:border-primary/30 transition-all duration-300 ${tile.span} ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}
                 style={{ animationDelay: `${i * 100}ms` }}
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="p-2 rounded-lg bg-primary/10 text-primary-light">
+                  <div className="p-2 rounded-lg bg-primary/10 text-primary-light" aria-hidden="true">
                     <tile.icon size={18} />
                   </div>
                   <span className="text-xs uppercase tracking-wider text-text-muted font-medium">
@@ -91,7 +100,7 @@ export default function About() {
                     {tile.copy}
                   </p>
                 )}
-              </div>
+              </article>
             ))}
           </div>
         </div>

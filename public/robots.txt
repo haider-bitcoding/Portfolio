@@ -1,0 +1,7 @@
+# robots.txt for Haider Ali's portfolio
+# https://ihaiderr.github.io/
+
+User-agent: *
+Allow: /
+
+Sitemap: https://ihaiderr.github.io/sitemap.xml
